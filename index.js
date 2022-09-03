@@ -2,7 +2,10 @@
 const other = require('./other.js')
 // core modules
 const http = require('http')
+const url = require('url')
 const port = 5000
+
+console.log(url)
 
 // thire party modules -> underscore
 const _ = require('underscore')
@@ -16,7 +19,10 @@ const res = _.pluck(stooges, 'age')
 // console.log(res)
 
 const requestHandler = (req, res) => {
-	console.log(req.url)
+	const address_url = 'http://localhost:5000/?name=shorif&country=bangladesh'
+	const parsed_url = url.parse(address_url, true)
+	const queryObject = parsed_url.query
+	console.log(queryObject, 'query')
 	// res.end('Hello Node.js Server!')
 	if (req.url == '/') {
 		res.writeHead(200, { 'Content-Type': 'application/json' })
