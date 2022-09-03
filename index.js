@@ -1,3 +1,5 @@
+// local modules
+const other = require('./other.js')
 // core modules
 const http = require('http')
 const port = 5000
@@ -11,11 +13,24 @@ var stooges = [
 	{ name: 'curly', age: 60 },
 ]
 const res = _.pluck(stooges, 'age')
-console.log(res)
+// console.log(res)
 
-const requestHandler = (request, response) => {
-	console.log(request.url)
-	response.end('Hello Node.js Server!')
+const requestHandler = (req, res) => {
+	console.log(req.url)
+	// res.end('Hello Node.js Server!')
+	if (req.url == '/') {
+		res.writeHead(200, { 'Content-Type': 'application/json' })
+		res.write(JSON.stringify({ course: 'ACC' }))
+		res.end()
+	} else if (req.url == '/contact') {
+		res.writeHead(200, { 'Content-Type': 'text/html' })
+		res.write('<p>This is contact page</p>')
+		res.end()
+	} else if (req.url == '/about-us') {
+		res.writeHead(200, { 'Content-Type': 'text/html' })
+		res.write('<p>This is about us page</p>')
+		res.end()
+	}
 }
 
 const server = http.createServer(requestHandler)
