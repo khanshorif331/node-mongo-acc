@@ -1,5 +1,5 @@
 // core modules
-const http = require('http')
+// const http = require('http')
 
 // thire party modules -> underscore
 const _ = require('underscore')
@@ -7,9 +7,7 @@ const _ = require('underscore')
 // 	console.log('Server is running')
 // })
 // server.listen(5000)
-http.createServer(function createServer(req, res) {
-	console.log('heelo')
-})
+// /
 var stooges = [
 	{ name: 'moe', age: 40 },
 	{ name: 'larry', age: 50 },
@@ -31,3 +29,22 @@ console.log(res)
 // fs
 // util
 console.log('hello world')
+
+const http = require('http')
+const port = 5000
+
+const requestHandler = (request, response) => {
+	console.log(request.url)
+	response.end('Hello Node.js Server!')
+	console.log('Hello Node.js Server!')
+}
+
+const server = http.createServer(requestHandler)
+
+server.listen(port, err => {
+	if (err) {
+		return console.log('something bad happened', err)
+	}
+
+	console.log(`server is listening on ${port}`)
+})
